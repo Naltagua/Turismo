@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Naltagua_1.js"></script>
+        <script src="data/Naltagua_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-33.75357536969263,-71.00125283565107],[-33.724736356936795,-70.95834691705939]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_Naltagua_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_REG_CA'] !== null ? autolinker.link(feature.properties['T_REG_CA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>T_REG_NOM</strong><br />' + (feature.properties['T_REG_NOM'] !== null ? autolinker.link(feature.properties['T_REG_NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_PROV_CA'] !== null ? autolinker.link(feature.properties['T_PROV_CA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_PROV_NOM'] !== null ? autolinker.link(feature.properties['T_PROV_NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_COM'] !== null ? autolinker.link(feature.properties['T_COM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COMUNA'] !== null ? autolinker.link(feature.properties['COMUNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_COM_NOM'] !== null ? autolinker.link(feature.properties['T_COM_NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_UV_COD'] !== null ? autolinker.link(feature.properties['T_UV_COD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_UV'] !== null ? autolinker.link(feature.properties['ID_UV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['T_UV_NOM'] !== null ? autolinker.link(feature.properties['T_UV_NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM'] !== null ? autolinker.link(feature.properties['NOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Naltagua_1_0() {
+            return {
+                pane: 'pane_Naltagua_1',
+                opacity: 1,
+                color: 'rgba(171,171,171,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Naltagua_1');
+        map.getPane('pane_Naltagua_1').style.zIndex = 401;
+        map.getPane('pane_Naltagua_1').style['mix-blend-mode'] = 'normal';
+        var layer_Naltagua_1 = new L.geoJson(json_Naltagua_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Naltagua_1',
+            layerName: 'layer_Naltagua_1',
+            pane: 'pane_Naltagua_1',
+            onEachFeature: pop_Naltagua_1,
+            style: style_Naltagua_1_0,
+        });
+        bounds_group.addLayer(layer_Naltagua_1);
+        map.addLayer(layer_Naltagua_1);
+        function pop_Naltagua_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Contacto'] !== null ? autolinker.link(feature.properties['Contacto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipología'] !== null ? autolinker.link(feature.properties['Tipología'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Localidad'] !== null ? autolinker.link(feature.properties['Localidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Naltagua_2_0(feature) {
+            switch(String(feature.properties['Tipología'])) {
+                case 'Agroecología':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/comida-sana.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Artesanía en fierro':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/artesanias.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Atractivo gastronómico':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/gastronomia.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Atractivo patrimonial':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/casa.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Camping':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/camping.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Centro de eventos':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/piscina.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Centro de salud':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/hospital.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Cervecería':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/cerveza.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Fauna':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/cacatua.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Huevos':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/huevo.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Locera':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/artesano.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Productos agroecológicos':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/comida-sana.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Sendero interpretativo':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/trekking.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'SN':
+                    return {
+                pane: 'pane_Naltagua_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,152,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Talabartería':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/zapatero.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Venta de Flores':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/flor.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Venta de ropa reciclada':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/ropa.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Viña':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/vino.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+                case 'Vivero':
+                    return {
+                pane: 'pane_Naltagua_2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/tienda-de-viveres.svg',
+            iconSize: [22.799999999999997, 22.799999999999997]
+        }),
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Naltagua_2');
+        map.getPane('pane_Naltagua_2').style.zIndex = 402;
+        map.getPane('pane_Naltagua_2').style['mix-blend-mode'] = 'normal';
+        var layer_Naltagua_2 = new L.geoJson(json_Naltagua_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Naltagua_2',
+            layerName: 'layer_Naltagua_2',
+            pane: 'pane_Naltagua_2',
+            onEachFeature: pop_Naltagua_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Naltagua_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Naltagua_2);
+        map.addLayer(layer_Naltagua_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Naltagua<br /><table><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Agroecología0.png" /></td><td>Agroecología</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Artesaníaenfierro1.png" /></td><td>Artesanía en fierro</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Atractivogastronómico2.png" /></td><td>Atractivo gastronómico</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Atractivopatrimonial3.png" /></td><td>Atractivo patrimonial</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Camping4.png" /></td><td>Camping</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Centrodeeventos5.png" /></td><td>Centro de eventos</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Centrodesalud6.png" /></td><td>Centro de salud</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Cervecería7.png" /></td><td>Cervecería</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Fauna8.png" /></td><td>Fauna</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Huevos9.png" /></td><td>Huevos</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Locera10.png" /></td><td>Locera</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Productosagroecológicos11.png" /></td><td>Productos agroecológicos</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Senderointerpretativo12.png" /></td><td>Sendero interpretativo</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_SN13.png" /></td><td>SN</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Talabartería14.png" /></td><td>Talabartería</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_VentadeFlores15.png" /></td><td>Venta de Flores</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Ventaderopareciclada16.png" /></td><td>Venta de ropa reciclada</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Viña17.png" /></td><td>Viña</td></tr><tr><td style="text-align: center;"><img src="legend/Naltagua_2_Vivero18.png" /></td><td>Vivero</td></tr></table>': layer_Naltagua_2,'<img src="legend/Naltagua_1.png" /> Naltagua': layer_Naltagua_1,"OSM Standard": layer_OSMStandard_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
